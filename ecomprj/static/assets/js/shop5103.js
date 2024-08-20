@@ -119,3 +119,8 @@ function showMore() {
         button.textContent = 'Show Less';
     }
 }
+document.getElementById('add-to-cart-btn').addEventListener('click', function(event) {
+    if (this.disabled) {
+        event.preventDefault();
+    }
+});

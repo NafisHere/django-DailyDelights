@@ -261,7 +261,7 @@ input[type=number]:focus,
 }
 
 .text-brand {
-  color: #883bb7 !important;
+  color: rgb(6, 183, 112); !important;
 }
 
 .text-brand-2 {
@@ -1351,6 +1351,13 @@ label {
   color: #fff;
 }
 
+.custom-check {
+  color: rgb(14, 253, 14); /* Change the color */
+  font-size: 24px; /* Change the size */
+  font-weight: bold; /* Make it bold */
+  vertical-align: middle; /* Align it vertically if needed */
+  /* Add any other custom styles here */
+}
 /* Ensuring all elements use border-box */
 *,
 *:before,
@@ -1373,7 +1380,7 @@ li {
 
 a {
   text-decoration: none;
-  color: #111;
+  color: rgb(6, 183, 112);;
   font-size: 16px;
 }
 
@@ -4479,6 +4486,10 @@ table .product-thumbnail img {
 .button.button-add-to-cart {
   padding: 8px 40px;
 }
+.button-add-to-cart[disabled] {
+  opacity: 0.5; /* Make it visually distinct */
+  pointer-events: none; /* Ensure it's not clickable */
+}
 
 .product-extra-link2 a {
   background: #fff none repeat scroll 0 0;
@@ -6089,8 +6100,8 @@ h6.post-title {
 }
 .header-action-2 .header-action-icon-2 > a span.pro-count {
   position: absolute;
-  right: -4px;
-  top: -6px;
+  right: -2px;
+  top: -2px;
   color: #ffffff;
   height: 20px;
   width: 20px;

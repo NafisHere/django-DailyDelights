@@ -65,8 +65,8 @@
                                             </div>
                                             <div class="clearfix product-price-cover">
                                                 <div class="product-price primary-color float-left">
-                                                    <span class="current-price text-brand">৳{{p.price}}</span>
-                                                    <span>
+                                                    <span class="current-price text-brand">৳</span><span class="current-price text-brand current-price current-product-price-{{ p.id }}" id="current-product-price">{{p.price}}</span>
+                                                    <span> 
                                                         <span class="save-price font-md color3 ml-15">{{p.get_percentage|floatformat:0}}% Off</span>
                                                         <span class="old-price font-md ml-15">৳{{p.old_price}}</span>
                                                     </span>
@@ -75,28 +75,72 @@
                                             <div class="short-desc mb-30">
                                                 <p class="font-lg">{{ p.description|truncatechars:100|safe }}</p>
                                             </div>
-                                                <div class="attr-detail attr-size mb-30">
-                                                    <strong class="mr-10">Size / Weight: </strong>
-                                                    <ul class="list-filter size-filter font-small" id="weight-options">
-                                                        {% for weight in weight_options %}
-                                                            <li class="{% if weight == current_weight %}active{% endif %} {% if weight != current_weight %}disabled{% endif %}">
-                                                                <a href="#" onclick="return updateWeight('{{ weight }}', '{{ current_weight }}')" 
-                                                                class="{% if weight != current_weight %}disabled-link{% endif %}">{{ weight }}</a>
-                                                            </li>
-                                                        {% endfor %}
-                                                    </ul>
-                                                </div>
+                                                        <!-- <div class="attr-detail attr-size mb-10" style="margin-bottom: 10px;">
+                                                            <strong class="mr-10" style="margin-right: 10px;">Size / Weight: </strong>
+                                                            
+                                                            <ul class="list-filter size-filter font-small" id="weight-options" style="list-style-type: none; padding: 0; margin: 0; display: flex;">
+                                                                
+                                                                
+                                                                {% for weight in weight_options %}
+                                                                    <li class="{% if weight == current_weight %}active{% endif %} {% if weight != current_weight %}disabled{% endif %}" style="margin-right: 5px;">
+                                                                        <a href="#" onclick="return updateWeight('{{ weight }}', '{{ current_weight }}')" 
+                                                                        class="{% if weight != current_weight %}disabled-link{% endif %}">{{ weight }}</a>
+                                                                    </li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </div> -->
                                             <div class="detail-extralink mb-50">
-                                                <div class="detail-qty border radius">
+
+                                                <!-- <div class="detail-qty border radius">
                                                     <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                                     <span class="qty-val">1</span>
                                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                                </div>
+                                                </div> -->
+                                                <!-- <div> -->
+                                                    <input type="number" name="" value="1" id="product-quantity" class="w-25 mb-20 product-quantity-{{ p.id }}">
+                                                    <br>
+                                                <!-- </div> -->
+
+
                                                 <div class="product-extra-link2">
-                                                    <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                                    <!-- <input type="hidden" value="{{p.id}}" class="product-id" name="" id="">
+                                                    <input type="hidden" value="{{p.title}}" class="product-title" id=""> -->
+                                                    <!-- <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.id  }}"  > -->
+                                                    <input type="hidden" value="{{p.pid}}"  class="product-pid-{{ p.id  }}"  >
+                                                    <input type="hidden" value="{{p.image.url}}"  class="product-image-{{ p.id  }}"  >
+                                                    <input type="hidden" value="{{p.title}}"  class="product-title-{{ p.id  }}"  >
+                                                    <input type="hidden" value="{{p.id}}"  class="product-id-{{ p.id  }}"  >
+
+
+                                                                {% with p.mfd|remaining_life:p.life as result %}
+                                                                
+                                                                
+                                                                    {% if result.0 == "Expired" %}
+                                                                    <!-- Unclickable Add to Cart button for expired products -->
+                                                                              <button type="submit" class="button button-add-to-cart add-to-cart-btn" data-index="{{p.id}}" id="add-to-cart-btn" disabled><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                                                    {% else %}
+                                                                    <!-- Clickable Add to Cart button for non-expired products -->
+                                                                              <button type="submit" class="button button-add-to-cart add-to-cart-btn" data-index="{{p.id}}" id="add-to-cart-btn"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                                                    {% endif %}
+                                                                {% endwith %}
+                                                                           <!-- <button type="submit" class="button button-add-to-cart" id="add-to-cart-btn"><i class="fi-rs-shopping-cart"></i>Add to cart</button> -->
                                                     <a aria-label='Add To Wishlist' class='action-btn hover-up' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
                                                     <a aria-label='Compare' class='action-btn hover-up' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
                                                 </div>
+                                            </div>
+                                            <div class="attr-detail attr-size mb-10" style="margin-bottom: 10px;">
+                                                <strong class="mr-10" style="margin-right: 10px;">Size / Weight: </strong>
+                                                
+                                                <ul class="list-filter size-filter font-small" id="weight-options" style="list-style-type: none; padding: 0; margin: 0; display: flex;">
+                                                    <!-- <br> -->
+                                                    
+                                                    {% for weight in weight_options %}
+                                                        <li class="{% if weight == current_weight %}active{% endif %} {% if weight != current_weight %}disabled{% endif %}" style="margin-right: 5px;">
+                                                            <a href="#" onclick="return updateWeight('{{ weight }}', '{{ current_weight }}')" 
+                                                            class="{% if weight != current_weight %}disabled-link{% endif %}">{{ weight }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
                                             </div>
                                             <div class="font-xs">
                                                 <ul class="mr-50 float-start" style="font-size: 1.1em;">
@@ -112,9 +156,9 @@
                                                 </ul>
                                                 
                                                 <ul class="float-start" style="font-size: 1.1em;">
-                                                    <li class="mb-5" style="font-weight: bold;">SKU: <a href="#" style="font-weight: bold;">{{p.sku}}</a></li>
+                                                    <li class="mb-5" style="font-weight: bold;">SKU: <a href="#" style="font-weight: bold; color: rgb(6, 183, 112);"> {{p.sku}} </a></li>
                                                     <li class="mb-5" style="font-weight: bold;">Tags:{% for tag in p.tags.all %} <a href="{% url 'core:tags' tag.slug  %}" rel="tag" style="font-weight: bold;">#{{ tag.name }}</a>, {% endfor %}</li>
-                                                    <li style="font-weight: bold;">Stock: <span class="in-stock text-brand ml-5" style="font-weight: bold;">{{p.stock_count}} Items In Stock</span></li>
+                                                    <li style="font-weight: bold;">Stock: <span class="in-stock text-brand ml-5" style="font-weight: bold; ">{{p.stock_count}} Items In Stock</span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -455,7 +499,7 @@
                                                             <span> </span>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span>৳{{p.price}} </span>
+                                                            <span>৳</span><span class="current-price current-product-price-{{ p.id }} text-brand" >{{p.price}}</span>
                                                             <span class="old-price">৳{{p.old_price}}</span>
                                                         </div>
                                                     </div>
@@ -685,6 +729,12 @@
         console.log("Selected weight: " + selectedWeight);
         return false; // Prevent the default link behavior
     }
+    document.getElementById('add-to-cart-btn').addEventListener('click', function(event) {
+    if (this.disabled) {
+        event.preventDefault();
+    }
+    });
+
     </script>
     <style>
     .disabled {
@@ -696,5 +746,10 @@
         pointer-events: none;
         color: grey;
     }
+    .button-add-to-cart[disabled] {
+    opacity: 0.2; /* Make it visually distinct */
+    pointer-events: none; /* Ensure it's not clickable */
+    }
+
     </style>
 {% endblock scripts %}
